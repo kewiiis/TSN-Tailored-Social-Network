@@ -1,0 +1,10 @@
+# Backend (Python/Django)
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Frontend (React/Node)
+node_modules/
+dist/
+.next/
