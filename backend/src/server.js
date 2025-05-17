@@ -4,6 +4,8 @@ import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/auth.routes.js';
 import postRoutes from './routes/posts.routes.js';
+import relationshipRoutes from './routes/relationships.routes.js';
+
 
 const app = express();
 
@@ -22,3 +24,5 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
   res.send('API backend TSN fonctionne !');
 });
+
+app.use('/api/relationships', relationshipRoutes);
