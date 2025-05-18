@@ -1,14 +1,16 @@
 // ✅ Chemin : frontend/src/App.jsx
-import { Auth } from './components/Auth';
-import { PostList } from './components/PostList';
+
+import React from 'react';
+import Recommendations from './components/Recommendations';
+import FriendsList from './components/FriendsList';
 
 function App() {
-  const token = localStorage.getItem('token');
-
   return (
     <div>
-      <h1>TSN - Tailored Social Network</h1>
-      {!token ? <Auth /> : <PostList />}
+      <h1>TSN - Réseau Social</h1>
+      <Recommendations userId={1} />
+      <hr />
+      <FriendsList userId={1} />
     </div>
   );
 }

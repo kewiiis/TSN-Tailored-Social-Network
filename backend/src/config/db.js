@@ -1,9 +1,11 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 
+console.log("🔎 URL DE CONNEXION POSTGRES UTILISÉE");
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  connectionString: 'postgresql://postgres@localhost:5433/tsn',
+  ssl: false
 });
 
 export default pool;
