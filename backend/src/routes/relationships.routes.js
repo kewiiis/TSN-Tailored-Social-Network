@@ -2,7 +2,8 @@ import express from 'express';
 import {
   addRelationship,
   getRelationships,
-  getRecommendations
+  getRecommendations,
+  deleteRelationship 
 } from '../controllers/relationshipController.js';
 
 const router = express.Router();

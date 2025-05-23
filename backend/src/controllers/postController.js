@@ -3,11 +3,11 @@ import pool from '../config/db.js';
 // ✅ Créer un post
 export const createPost = async (req, res) => {
   const { content } = req.body;
-  const userId = req.user.id;
+  const userId = req.user?.id || 1; // Temporairement user_id = 1 si pas d'auth
 
   try {
     const result = await pool.query(
-      'INSERT INTO posts (content, author_id) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO posts (content, user_id) VALUES ($1, $2) RETURNING *',
       [content, userId]
     );
 
@@ -18,17 +18,15 @@ export const createPost = async (req, res) => {
   }
 };
 
-
-// 🔄 Modifier un post (autorisation + update)
+// 🔄 Modifier un post
 export const updatePost = async (req, res) => {
   const postId = req.params.id;
-  const userId = req.user.id; // extrait depuis le token JWT
+  const userId = req.user?.id || 1;
   const { content } = req.body;
 
   try {
-    // Vérifie que le post appartient bien à l'utilisateur
     const check = await pool.query(
-      'SELECT * FROM posts WHERE id = $1 AND author_id = $2',
+      'SELECT * FROM posts WHERE id = $1 AND user_id = $2',
       [postId, userId]
     );
 
@@ -48,14 +46,14 @@ export const updatePost = async (req, res) => {
   }
 };
 
-// ❌ Supprimer un post (autorisation + suppression)
+// ❌ Supprimer un post
 export const deletePost = async (req, res) => {
   const postId = req.params.id;
-  const userId = req.user.id;
+  const userId = req.user?.id || 1;
 
   try {
     const check = await pool.query(
-      'SELECT * FROM posts WHERE id = $1 AND author_id = $2',
+      'SELECT * FROM posts WHERE id = $1 AND user_id = $2',
       [postId, userId]
     );
 
@@ -72,11 +70,11 @@ export const deletePost = async (req, res) => {
   }
 };
 
-// Récupérer tous les posts
+// 📥 Récupérer tous les posts avec l'auteur
 export const getAllPosts = async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT posts.*, users.username AS author_name FROM posts JOIN users ON posts.author_id = users.id ORDER BY posts.created_at DESC'
+      'SELECT posts.*, users.name AS author_name FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC'
     );
     res.status(200).json(result.rows);
   } catch (error) {

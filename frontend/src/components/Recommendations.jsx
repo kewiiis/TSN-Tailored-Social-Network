@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 function Recommendations({ userId }) {
   const [recommendations, setRecommendations] = useState([]);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/relationships/${userId}/recommendations`)
@@ -12,32 +13,7 @@ function Recommendations({ userId }) {
       .catch((err) => console.error('Erreur de chargement des recommandations :', err));
   }, [userId]);
 
-  return (
-    <div>
-      <h2>Suggestions d'amis</h2>
-      {message && <p style={{ color: 'green' }}>{message}</p>}
-      {recommendations.length === 0 ? (
-        <p>Aucune suggestion pour le moment.</p>
-      ) : (
-        <ul>
-            {recommendations.map((user) => (
-            <li key={user.id}>
-                👤 {user.name} — {user.email} ({user.mutual_count} ami{user.mutual_count > 1 ? 's' : ''} en commun)
-                <button
-                style={{ marginLeft: '10px' }}
-                onClick={() => handleAddFriend(user.id)}
-                >
-                Ajouter
-                </button>
-            </li>
-            ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-const handleAddFriend = (friendId) => {
+  const handleAddFriend = (friendId) => {
     fetch('http://localhost:5000/api/relationships', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -56,10 +32,30 @@ const handleAddFriend = (friendId) => {
       })
       .catch((err) => console.error('❌ Erreur ajout ami :', err));
   };
-  
 
-const [message, setMessage] = useState('');
-
-  
+  return (
+    <div>
+      <h2>Suggestions d'amis</h2>
+      {message && <p style={{ color: 'green' }}>{message}</p>}
+      {recommendations.length === 0 ? (
+        <p>Aucune suggestion pour le moment.</p>
+      ) : (
+        <ul>
+          {recommendations.map((user) => (
+            <li key={user.id}>
+              👤 {user.name} — {user.email} ({user.mutual_count} ami{user.mutual_count > 1 ? 's' : ''} en commun)
+              <button
+                style={{ marginLeft: '10px' }}
+                onClick={() => handleAddFriend(user.id)}
+              >
+                Ajouter
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export default Recommendations;
