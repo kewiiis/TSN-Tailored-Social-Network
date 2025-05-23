@@ -1,5 +1,3 @@
-// ✅ Chemin : frontend/src/components/FriendsList.jsx
-
 import React, { useEffect, useState } from 'react';
 
 function FriendsList({ userId }) {
@@ -32,7 +30,7 @@ function FriendsList({ userId }) {
   };
 
   return (
-    <div>
+    <div className="box">
       <h2>Mes amis</h2>
       {message && <p style={{ color: 'red' }}>{message}</p>}
       <ul>

@@ -1,28 +1,64 @@
 import React, { useState, useEffect } from 'react';
-import Recommendations from './components/Recommendations';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Layout from './components/Layout';
 import Login from './components/Login';
+import Register from './components/Register';
+import PostForm from './components/PostForm';
+import PostList from './components/PostList';
+import Profile from './components/Profile';
+import FriendsList from './components/FriendsList';
+import Recommendations from './components/Recommendations';
 
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // ✅ Vérifie si un user est déjà connecté
     const storedUser = localStorage.getItem('user');
     if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
 
-  return (
-    <div>
-      <h1>TSN - Réseau Social</h1>
-      {user ? (
-        <>
-          <p>👋 Bienvenue, {user.name}</p>
-          <Recommendations userId={user.id} />
-        </>
-      ) : (
+  const handleLogout = () => {
+    localStorage.clear();
+    setUser(null);
+  };
+
+  if (!user) {
+    return (
+      <div className="auth-wrapper">
+        <h2>Bienvenue sur TSN</h2>
         <Login onLogin={setUser} />
-      )}
-    </div>
+        <Register onRegister={setUser} />
+      </div>
+    );
+  }
+
+  return (
+    <Router>
+      <Layout user={user} onLogout={handleLogout}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <PostForm userId={user.id} onPostCreated={() => window.location.reload()} />
+                <PostList currentUserId={user.id} />
+              </>
+            }
+          />
+          <Route
+            path="/profil"
+            element={
+              <>
+                <Profile user={user} />
+                <FriendsList userId={user.id} />
+                <Recommendations userId={user.id} />
+              </>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
