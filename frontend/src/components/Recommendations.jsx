@@ -1,8 +1,6 @@
-// ✅ Chemin : frontend/src/components/Recommendations.jsx
-
 import React, { useEffect, useState } from 'react';
 
-function Recommendations({ userId }) {
+function Recommendations({ userId, onFriendAdded }) {
   const [recommendations, setRecommendations] = useState([]);
   const [message, setMessage] = useState('');
 
@@ -28,13 +26,14 @@ function Recommendations({ userId }) {
           prev.filter((user) => user.id !== friendId)
         );
         setMessage("✅ Ami ajouté !");
-        setTimeout(() => setMessage(''), 3000); // efface le message au bout de 3 sec
+        if (onFriendAdded) onFriendAdded(); // ✅ Rafraîchit les contacts
+        setTimeout(() => setMessage(''), 3000);
       })
       .catch((err) => console.error('❌ Erreur ajout ami :', err));
   };
 
   return (
-    <div>
+    <div className="box">
       <h2>Suggestions d'amis</h2>
       {message && <p style={{ color: 'green' }}>{message}</p>}
       {recommendations.length === 0 ? (

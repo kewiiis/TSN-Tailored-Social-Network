@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "concurrently \"cd backend && npm start\" \"cd frontend && npm start\"",
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\""
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && set NODE_OPTIONS=--openssl-legacy-provider && npm start\""
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

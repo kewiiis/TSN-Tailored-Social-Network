@@ -8,9 +8,11 @@ import PostList from './components/PostList';
 import Profile from './components/Profile';
 import FriendsList from './components/FriendsList';
 import Recommendations from './components/Recommendations';
+import Chat from './components/Chat';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [friendUpdateFlag, setFriendUpdateFlag] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -50,9 +52,14 @@ function App() {
             element={
               <>
                 <Profile user={user} />
-                <FriendsList userId={user.id} />
-                <Recommendations userId={user.id} />
+                <FriendsList userId={user.id} refreshFlag={friendUpdateFlag} />
               </>
+            }
+          />
+          <Route
+            path="/messagerie"
+            element={
+              <Chat currentUserId={user.id} />
             }
           />
           <Route path="*" element={<Navigate to="/" />} />

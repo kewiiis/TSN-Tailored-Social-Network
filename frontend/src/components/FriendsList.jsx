@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function FriendsList({ userId }) {
+function FriendsList({ userId, refreshFlag }) {
   const [friends, setFriends] = useState([]);
   const [message, setMessage] = useState('');
 
@@ -9,7 +9,7 @@ function FriendsList({ userId }) {
       .then((res) => res.json())
       .then((data) => setFriends(data))
       .catch((err) => console.error('❌ Erreur chargement amis :', err));
-  }, [userId]);
+  }, [userId, refreshFlag]);
 
   const handleRemoveFriend = (friendId) => {
     fetch(`http://localhost:5000/api/relationships`, {
