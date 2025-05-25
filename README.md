@@ -1,35 +1,32 @@
-TSN - Tailored Social Network
+## 🌟 Fonctionnalités
 
-TSN est un réseau social développé dans le cadre d'un projet universitaire. Il permet à des utilisateurs de créer des publications, de voir le fil d'actualité, de gérer leurs amis, de recevoir des suggestions d'amitiés basées sur des connaissances communes et de gérer leur profil.
+- 🔐 Authentification JWT (inscription, connexion, déconnexion)
+- 📝 Création, modification, suppression de publications (avec vérification d’auteur)
+- 📰 Fil d’actualité
+- 👥 Gestion d’amis (ajout, suppression, affichage)
+- 🤝 Suggestions d’amis via amis communs
+- 👤 Page de profil
+- 💬 **Messagerie privée avec notifications visuelles**
+- 🔔 Badge rouge en cas de messages non lus
+- 🎨 Design moderne et épuré avec fond personnalisable (`index.css`)
+- ✅ Mots de passe **hashés** en base avec `bcrypt`
 
-🌟 Fonctionnalités
+---
 
-        - Authentification JWT (inscription, connexion, déconnexion)
+## ⚙️ Prérequis
 
-        - Création, modification, suppression de publications (avec vérification de propriétaire)
+- Node.js (v18+ recommandé)
+- PostgreSQL (v13+)
 
-        - Visualisation du fil d'actualité
+---
 
-        - Système d'amis (ajout, suppression, visualisation)
+## 🧰 Installation et Configuration
 
-        - Suggestions d'amis basées sur les amis en commun
+### 1. Cloner le dépôt
 
-        - Affichage profil
-
-        - Interface adaptée, claire et moderne
-
-⚙️ Prérequis
-
-        - Node.js (v18+ recommandé)
-
-        - PostgreSQL (v13+)
-
-🧰 Installation et Configuration
-        1. Cloner le dépôt
-    
-            git clone https://github.com/ton-utilisateur/TSN-Tailored-Social-Network.git
-
-            cd TSN-Tailored-Social-Network
+```bash
+git clone https://github.com/ton-utilisateur/TSN-Tailored-Social-Network.git
+cd TSN-Tailored-Social-Network
 
 
         2. Installer les dépendances
@@ -42,7 +39,7 @@ TSN est un réseau social développé dans le cadre d'un projet universitaire. I
 
             Frontend
             |
-            ----cd frontend
+            ----cd ../frontend
             | 
             ----npm install
 
@@ -110,13 +107,20 @@ TSN est un réseau social développé dans le cadre d'un projet universitaire. I
         │   │   └── index.css
         └── README.md
 
-🚀 Améliorations futures
+🧪 Données de test
+        Utilisateurs créés dans seed_db.js :
 
-Ajout de likes/commentaires sur les posts
+            Alice : alice@example.com
 
-Messagerie privée
+            Bob : bob@example.com
 
-Upload d'images pour les posts et les profils
+            Charlie : charlie@example.com
+
+            Mot de passe : tsn1234
+
+        Tous les mots de passe sont hachés
+
+        Des relations d’amitié sont prédéfinies
 
 📄 Licence
 
