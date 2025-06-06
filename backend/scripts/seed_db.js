@@ -18,8 +18,11 @@ const seed = async () => {
 
     await pool.query(`
       DELETE FROM relationships;
+      DELETE FROM messages;
+      DELETE FROM posts;         -- ✅ Supprime d'abord les publications
       DELETE FROM users;
     `);
+
     console.log("🧹 Tables vidées");
 
     // Hash des mots de passe
