@@ -1,4 +1,3 @@
-// ✅ backend/src/controllers/authController.js
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -20,7 +19,7 @@ export const registerUser = async (req, res) => {
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
-  console.error("❌ Erreur d'inscription :", err);
+  console.error(" Erreur d'inscription :", err);
     res.status(500).json({ message: 'Erreur lors de l\'inscription.' });
   }
 };
@@ -29,7 +28,7 @@ export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    console.log("🔐 Requête de login reçue :", req.body);
+    console.log(" Requête de login reçue :", req.body);
 
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
 
@@ -37,9 +36,9 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Email incorrect' });
     }
 
-    const user = result.rows[0]; // ✅ Initialisé ici, AVANT de l’utiliser
-    console.log("🔑 Mot de passe reçu :", password);
-    console.log("🧠 Mot de passe haché stocké :", user.password);
+    const user = result.rows[0]; //  Initialisé ici, AVANT de l’utiliser
+    console.log(" Mot de passe reçu :", password);
+    console.log(" Mot de passe haché stocké :", user.password);
 
     const isMatch = await bcrypt.compare(password, user.password);
 
@@ -63,7 +62,7 @@ export const loginUser = async (req, res) => {
     });
 
   } catch (err) {
-    console.error("❌ Erreur login :", err);
+    console.error(" Erreur login :", err);
     res.status(500).json({ message: 'Erreur lors de la connexion.' });
   }
 };

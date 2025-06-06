@@ -12,7 +12,7 @@ const pool = new Pool({
 
 
 
-console.log("✅ Fonction getRecommendations appelée");
+console.log("Fonction getRecommendations appelée");
 
 export const addRelationship = async (req, res) => {
   const { user_id, friend_id } = req.body;

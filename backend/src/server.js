@@ -26,5 +26,5 @@ app.get('/', (req, res) => {
 
 const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`✅ Serveur backend en écoute sur http://localhost:${PORT}`);
+  console.log(`Serveur backend en écoute sur http://localhost:${PORT}`);
 });

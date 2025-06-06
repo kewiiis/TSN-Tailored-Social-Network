@@ -1,9 +1,8 @@
 import pool from '../config/db.js';
 
-// ✅ Créer un post
 export const createPost = async (req, res) => {
   const { content } = req.body;
-  const userId = req.user?.id || 1; // Temporairement user_id = 1 si pas d'auth
+  const userId = req.user?.id || 1; 
 
   try {
     const result = await pool.query(
@@ -18,7 +17,6 @@ export const createPost = async (req, res) => {
   }
 };
 
-// 🔄 Modifier un post
 export const updatePost = async (req, res) => {
   const postId = req.params.id;
   const userId = req.user?.id || 1;
@@ -46,7 +44,6 @@ export const updatePost = async (req, res) => {
   }
 };
 
-// ❌ Supprimer un post
 export const deletePost = async (req, res) => {
   const postId = req.params.id;
   const userId = req.user?.id || 1;
@@ -70,7 +67,6 @@ export const deletePost = async (req, res) => {
   }
 };
 
-// 📥 Récupérer tous les posts avec l'auteur
 export const getAllPosts = async (req, res) => {
   try {
     const result = await pool.query(

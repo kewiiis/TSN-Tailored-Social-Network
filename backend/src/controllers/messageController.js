@@ -14,7 +14,7 @@ export const getMessagesBetweenUsers = async (req, res) => {
 
     res.status(200).json(result.rows);
   } catch (err) {
-    console.error('❌ Erreur lors de la récupération des messages :', err);
+    console.error(' Erreur lors de la récupération des messages :', err);
     res.status(500).json({ message: 'Erreur serveur.' });
   }
 };
@@ -35,12 +35,12 @@ export const sendMessage = async (req, res) => {
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error('❌ Erreur lors de l’envoi du message :', err);
+    console.error(' Erreur lors de l’envoi du message :', err);
     res.status(500).json({ message: 'Erreur serveur.' });
   }
 };
 
-// ✅ Récupérer le nombre de messages non lus pour un utilisateur donné
+// Récupérer le nombre de messages non lus pour un utilisateur donné
 export const getUnreadMessages = async (req, res) => {
   const { userId } = req.params;
 
@@ -52,7 +52,7 @@ export const getUnreadMessages = async (req, res) => {
 
     res.json({ unreadCount: parseInt(result.rows[0].count, 10) });
   } catch (err) {
-    console.error("❌ Erreur récupération messages non lus :", err);
+    console.error(" Erreur récupération messages non lus :", err);
     res.status(500).json({ message: "Erreur serveur" });
   }
 };
@@ -69,7 +69,7 @@ export const markMessagesAsRead = async (req, res) => {
 
     res.status(200).json({ message: "Messages marqués comme lus." });
   } catch (err) {
-    console.error("❌ Erreur lors de la mise à jour des messages :", err);
+    console.error(" Erreur lors de la mise à jour des messages :", err);
     res.status(500).json({ message: "Erreur serveur." });
   }
 };

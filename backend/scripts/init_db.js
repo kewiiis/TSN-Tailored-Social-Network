@@ -37,15 +37,14 @@ const createTables = async () => {
       );
     `);
 
-    // ✅ Séparé du CREATE
     await pool.query(`
       ALTER TABLE messages ADD COLUMN IF NOT EXISTS is_read BOOLEAN DEFAULT FALSE;
     `);
 
-    console.log("✅ Tables créées ou déjà existantes.");
+    console.log(" Tables créées ou déjà existantes.");
     process.exit(0);
   } catch (err) {
-    console.error("❌ Erreur lors de la création des tables :", err);
+    console.error(" Erreur lors de la création des tables :", err);
     process.exit(1);
   }
 };

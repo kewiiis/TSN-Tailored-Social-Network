@@ -14,12 +14,12 @@ const pool = new Pool({
 const seed = async () => {
   try {
     // Supprime les données précédentes
-    console.log("🚀 Début du seed...");
+    console.log(" Début du seed...");
 
     await pool.query(`
       DELETE FROM relationships;
       DELETE FROM messages;
-      DELETE FROM posts;         -- ✅ Supprime d'abord les publications
+      DELETE FROM posts;        
       DELETE FROM users;
     `);
 
@@ -45,7 +45,7 @@ const seed = async () => {
     ];
 
     for (const [name, email] of userData) {
-      console.log(`➡️ Insertion de ${name}`);
+      console.log(`Insertion de ${name}`);
       await pool.query(
         `INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`,
         [name, email, hash]
@@ -70,10 +70,10 @@ const seed = async () => {
       `, [alice, bob, charlie]);
     }
 
-    console.log("✅ Données de test insérées !");
+    console.log(" Données de test insérées !");
     process.exit(0);
   } catch (err) {
-    console.error("❌ Erreur d’insertion :", err);
+    console.error(" Erreur d’insertion :", err);
     process.exit(1);
   }
 };

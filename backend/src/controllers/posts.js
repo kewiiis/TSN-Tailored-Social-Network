@@ -7,5 +7,4 @@ export const createPost = async (req, res) => {
 };
 
 export const getRecommendations = async (req, res) => {
-  // ... (code existant de la route /recommendations)
 };

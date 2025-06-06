@@ -1,4 +1,3 @@
-// ✅ Chemin : backend/src/middlewares/validators.js
 
 import { body, validationResult } from 'express-validator';
 
